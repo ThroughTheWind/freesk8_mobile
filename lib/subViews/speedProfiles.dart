@@ -46,7 +46,7 @@ class SpeedProfilesEditorState extends State<SpeedProfilesEditor> {
   @override
   void initState() {
 
-    _applyESCProfilePermanently = false;
+    _applyESCProfilePermanently = true;
     super.initState();
   }
 
@@ -149,48 +149,48 @@ class SpeedProfilesEditorState extends State<SpeedProfilesEditor> {
                                 return Text("${snapshot.data}");
                               }),
 
-                          ElevatedButton(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text("Reset "),
-                                Icon(Icons.flip_camera_android),
-                              ],),
-                            onPressed: () async {
-                              //TODO: reset values
-                              await ESCHelper.setESCProfile(i, ESCHelper.getESCProfileDefaults(i));
-                              setState(() {
-
-                              });
-                            },
-                            style: ButtonStyle(backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-                              if (states.contains(MaterialState.disabled)) {
-                                return Colors.grey[100];
-                              }
-                              return Colors.transparent;
-                            })),
-                          ),
-                          ElevatedButton(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text("Edit "),
-                                Icon(Icons.edit),
-                              ],),
-                            onPressed: () async {
-                              // navigate to the editor
-                              final result = await Navigator.of(context).pushNamed(ESCProfileEditor.routeName, arguments: ESCProfileEditorArguments(myArguments.theTXCharacteristic, await ESCHelper.getESCProfile(i), i, myArguments.myUserSettings.settings.useImperial));
-                              setState(() {
-                                // Update UI in case changes were made
-                              });
-                            },
-                            style: ButtonStyle(backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-                              if (states.contains(MaterialState.disabled)) {
-                                return Colors.grey[100];
-                              }
-                              return Colors.transparent;
-                            })),
-                          ),
+                          // ElevatedButton(
+                          //   child: Row(
+                          //     mainAxisAlignment: MainAxisAlignment.center,
+                          //     children: <Widget>[
+                          //       Text("Reset "),
+                          //       Icon(Icons.flip_camera_android),
+                          //     ],),
+                          //   onPressed: () async {
+                          //     //TODO: reset values
+                          //     await ESCHelper.setESCProfile(i, ESCHelper.getESCProfileDefaults(i));
+                          //     setState(() {
+                          //
+                          //     });
+                          //   },
+                          //   style: ButtonStyle(backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+                          //     if (states.contains(MaterialState.disabled)) {
+                          //       return Colors.grey[100];
+                          //     }
+                          //     return Colors.transparent;
+                          //   })),
+                          // ),
+                          // ElevatedButton(
+                          //   child: Row(
+                          //     mainAxisAlignment: MainAxisAlignment.center,
+                          //     children: <Widget>[
+                          //       Text("Edit "),
+                          //       Icon(Icons.edit),
+                          //     ],),
+                          //   onPressed: () async {
+                          //     // navigate to the editor
+                          //     final result = await Navigator.of(context).pushNamed(ESCProfileEditor.routeName, arguments: ESCProfileEditorArguments(myArguments.theTXCharacteristic, await ESCHelper.getESCProfile(i), i, myArguments.myUserSettings.settings.useImperial));
+                          //     setState(() {
+                          //       // Update UI in case changes were made
+                          //     });
+                          //   },
+                          //   style: ButtonStyle(backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+                          //     if (states.contains(MaterialState.disabled)) {
+                          //       return Colors.grey[100];
+                          //     }
+                          //     return Colors.transparent;
+                          //   })),
+                          // ),
                           ElevatedButton(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -268,23 +268,23 @@ class SpeedProfilesEditorState extends State<SpeedProfilesEditor> {
               },
             ),
           ),
-          SizedBox(
-            height: 100,
-            child: ListView(
-              padding: EdgeInsets.all(5),
-              primary: false,
-              children: <Widget>[
-                SwitchListTile(
-                  title: Text("Retain profile after ESC is reset?"),
-                  value: _applyESCProfilePermanently,
-                  onChanged: (bool newValue) { setState((){_applyESCProfilePermanently = newValue;}); },
-                  secondary: const Icon(Icons.memory),
-                ),
-
-
-              ],
-            ),
-          )
+          // SizedBox(
+          //   height: 100,
+          //   child: ListView(
+          //     padding: EdgeInsets.all(5),
+          //     primary: false,
+          //     children: <Widget>[
+          //       SwitchListTile(
+          //         title: Text("Retain profile after ESC is reset?"),
+          //         value: _applyESCProfilePermanently,
+          //         onChanged: (bool newValue) { setState((){_applyESCProfilePermanently = newValue;}); },
+          //         secondary: const Icon(Icons.memory),
+          //       ),
+          //
+          //
+          //     ],
+          //   ),
+          // )
         ],
       ),
     );

@@ -94,7 +94,7 @@ void main() {
   //initFirebase();
   runApp(MaterialApp(
       // Title
-      title: "FreeSK8",
+      title: "SqMotors",
       // Home
       home: MyHome(),
       routes: <String, WidgetBuilder>{
@@ -3125,7 +3125,7 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
             // Vertical show appbar
         AppBar(
           title: Row(children: [
-            Text("FreeSK8 (v$freeSK8ApplicationVersion)"),
+            Text("SqMotors"),
             syncInProgress ? Icon(Icons.sync) : Container()
           ],),
           // Set the background color of the App Bar

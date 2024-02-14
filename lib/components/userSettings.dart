@@ -119,7 +119,7 @@ class UserSettings {
     settings.showDebugLogOnShake = prefs.getBool('showDebugLogOnShake') ?? true;
 
     settings.boardAlias =
-        prefs.getString('$currentDeviceID boardAlias') ?? "Unnamed";
+        prefs.getString('$currentDeviceID boardAlias') ?? "Sternboard 3";
 
     settings.boardAvatarPath =
         prefs.getString('$currentDeviceID boardAvatarPath') ?? null;

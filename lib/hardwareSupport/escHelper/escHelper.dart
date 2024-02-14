@@ -390,19 +390,10 @@ class ESCHelper {
         profile.l_watt_max = 0.0;
         profile.l_watt_min = 0.0;
         break;
-      case 2:
+      default:
         profile.profileName = "35 km/h";
         profile.speedKmh = 150.0;
         profile.speedKmhRev = -150.0;
-        profile.l_current_max_scale = 1.0;
-        profile.l_current_min_scale = 1.0;
-        profile.l_watt_max = 0.0;
-        profile.l_watt_min = 0.0;
-        break;
-      default:
-        profile.profileName = "Unnamed";
-        profile.speedKmh = 32.0;
-        profile.speedKmhRev = -32.0;
         profile.l_current_max_scale = 1.0;
         profile.l_current_min_scale = 1.0;
         profile.l_watt_max = 0.0;
