@@ -632,15 +632,15 @@ class RealTimeDataState extends State<RealTimeData> {
               Spacer(),
               childOdometer,
 
-              Spacer(),
-              childConsumption,
+              // Spacer(),
+              // childConsumption,
 
               Spacer(),
               childMosfetTemp,
 
               Spacer(),
-              childMotorTemp,
-              Spacer(),
+              //childMotorTemp,
+              //Spacer(),
             ],
           ),
           Spacer(),
@@ -753,8 +753,8 @@ class RealTimeDataState extends State<RealTimeData> {
                 Spacer(),
                 childBatteryCurrent,
                 Spacer(),
-                childConsumption,
-                Spacer(),
+                // childConsumption,
+                // Spacer(),
               ]
           ),
           Spacer(),
@@ -765,8 +765,8 @@ class RealTimeDataState extends State<RealTimeData> {
                 Spacer(),
                 childMosfetTemp,
                 Spacer(),
-                childMotorTemp,
-                Spacer(),
+                // childMotorTemp,
+                // Spacer(),
               ]
           ),
           Spacer(),

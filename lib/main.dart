@@ -2843,22 +2843,22 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
       // ),
       // Divider(thickness: 3),
 
-      ListTile(
-        leading: Icon(Icons.share_outlined),
-        title: Text(serverTCPSocket == null ? "Enable TCP Bridge" : "Disable TCP Bridge"),
-        onTap: () {
-          // Don't start if not connected
-          if (menuOptionIsReady(isRobogotchiOption: false) && serverTCPSocket == null) {
-            setState(() {
-              startTCPServer();
-            });
-          } else {
-            setState(() {
-              stopTCPServer();
-            });
-          }
-        },
-      ),
+      // ListTile(
+      //   leading: Icon(Icons.share_outlined),
+      //   title: Text(serverTCPSocket == null ? "Enable TCP Bridge" : "Disable TCP Bridge"),
+      //   onTap: () {
+      //     // Don't start if not connected
+      //     if (menuOptionIsReady(isRobogotchiOption: false) && serverTCPSocket == null) {
+      //       setState(() {
+      //         startTCPServer();
+      //       });
+      //     } else {
+      //       setState(() {
+      //         stopTCPServer();
+      //       });
+      //     }
+      //   },
+      // ),
 
       ListTile(
         leading: Icon(Icons.contact_support_outlined),

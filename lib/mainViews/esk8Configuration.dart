@@ -152,7 +152,7 @@ class ESK8ConfigurationState extends State<ESK8Configuration> {
                       size: 80.0,
                       color: Colors.blue,
                     ),
-                    Text("FreeSK8\nConfiguration", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                    Text("SqMotors\nConfiguration", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                   ],),
                   onLongPress: (){
                     setState(() {
@@ -215,309 +215,320 @@ class ESK8ConfigurationState extends State<ESK8Configuration> {
                   secondary: Icon(widget.myUserSettings.settings.useGPSData ? Icons.gps_fixed : Icons.gps_not_fixed),
                 ),
 
-                TextField(
-                  controller: tecBoardAlias,
-                  decoration: new InputDecoration(labelText: "Board Name / Alias"),
-                  keyboardType: TextInputType.text,
-                ),
+                // TextField(
+                //   controller: tecBoardAlias,
+                //   decoration: new InputDecoration(labelText: "Board Name / Alias"),
+                //   keyboardType: TextInputType.text,
+                // ),
 
-                SizedBox(height: 15),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-                  Column(children: <Widget>[
-                    Text("Board Avatar"),
-                    SizedBox(
-                      width: 125,
-                      child:  ElevatedButton(
-                          child:
-                          Row(mainAxisAlignment: MainAxisAlignment.center , children: <Widget>[Text("Take "),Icon(Icons.camera_alt),],),
+                // SizedBox(height: 15),
+                // Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+                //   Column(children: <Widget>[
+                //     Text("Board Avatar"),
+                //     SizedBox(
+                //       width: 125,
+                //       child:  ElevatedButton(
+                //           child:
+                //           Row(mainAxisAlignment: MainAxisAlignment.center , children: <Widget>[Text("Take "),Icon(Icons.camera_alt),],),
+                //
+                //           onPressed: () {
+                //             getImage(false);
+                //           }),
+                //     ),
+                //     SizedBox(
+                //       width: 125,
+                //       child:  ElevatedButton(
+                //           child:
+                //           Row(mainAxisAlignment: MainAxisAlignment.center , children: <Widget>[Text("Select "),Icon(Icons.filter),],),
+                //
+                //           onPressed: () {
+                //             getImage(true);
+                //           }),
+                //     )
+                //   ],),
+                //
+                //   SizedBox(width: 15),
+                //   CircleAvatar(
+                //       backgroundImage: _boardAvatar != null ? _boardAvatar : AssetImage('assets/FreeSK8_Mobile.png'),
+                //       radius: 100,
+                //       backgroundColor: Colors.white)
+                //
+                // ]),
 
-                          onPressed: () {
-                            getImage(false);
-                          }),
-                    ),
-                    SizedBox(
-                      width: 125,
-                      child:  ElevatedButton(
-                          child:
-                          Row(mainAxisAlignment: MainAxisAlignment.center , children: <Widget>[Text("Select "),Icon(Icons.filter),],),
-
-                          onPressed: () {
-                            getImage(true);
-                          }),
-                    )
-                  ],),
-
-                  SizedBox(width: 15),
-                  CircleAvatar(
-                      backgroundImage: _boardAvatar != null ? _boardAvatar : AssetImage('assets/FreeSK8_Mobile.png'),
-                      radius: 100,
-                      backgroundColor: Colors.white)
-
-                ]),
-
-                SizedBox(height:10),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-                  ElevatedButton(
-                      child: Text("Revert Settings"),
-                      onPressed: () {
-                        setState(() {
-                          widget.myUserSettings.reloadSettings();
-                          ScaffoldMessenger
-                              .of(context)
-                              .showSnackBar(SnackBar(content: Text('Application settings loaded from last state')));
-                        });
-                      }),
-
-                  SizedBox(width:15),
-
-                  ElevatedButton(
-                      child: Text("Save Settings"),
-                      onPressed: () async {
-                        FocusScope.of(context).requestFocus(new FocusNode()); //Hide keyboard
-                        try {
-                          if (tecBoardAlias.text.length < 1) tecBoardAlias.text = "Unnamed";
-                          widget.myUserSettings.settings.boardAlias = tecBoardAlias.text;
-                          // NOTE: Board avatar is updated with the image picker
-                          await widget.myUserSettings.saveSettings();
-
-                          // Update cached avatar
-                          widget.updateCachedAvatar(true);
-
-                          // Recompute statistics in case we change measurement units
-                          widget.updateComputedVehicleStatistics(false);
-
-                        } catch (e) {
-                          globalLogger.e("Save Settings Exception $e");
-                          ScaffoldMessenger
-                              .of(context)
-                              .showSnackBar(SnackBar(content: Text('Sorry friend. Save settings failed =(')));
-                        }
-                        ScaffoldMessenger
-                            .of(context)
-                            .showSnackBar(SnackBar(content: Text('Application settings saved')));
-                      }),
-
-
-                ],),
+                // SizedBox(height:10),
+                // Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+                //   ElevatedButton(
+                //       child: Text("Revert Settings"),
+                //       onPressed: () {
+                //         setState(() {
+                //           widget.myUserSettings.reloadSettings();
+                //           ScaffoldMessenger
+                //               .of(context)
+                //               .showSnackBar(SnackBar(content: Text('Application settings loaded from last state')));
+                //         });
+                //       }),
+                //
+                //   SizedBox(width:15),
+                //
+                //   ElevatedButton(
+                //       child: Text("Save Settings"),
+                //       onPressed: () async {
+                //         FocusScope.of(context).requestFocus(new FocusNode()); //Hide keyboard
+                //         try {
+                //           if (tecBoardAlias.text.length < 1) tecBoardAlias.text = "Unnamed";
+                //           widget.myUserSettings.settings.boardAlias = tecBoardAlias.text;
+                //           // NOTE: Board avatar is updated with the image picker
+                //           await widget.myUserSettings.saveSettings();
+                //
+                //           // Update cached avatar
+                //           widget.updateCachedAvatar(true);
+                //
+                //           // Recompute statistics in case we change measurement units
+                //           widget.updateComputedVehicleStatistics(false);
+                //
+                //         } catch (e) {
+                //           globalLogger.e("Save Settings Exception $e");
+                //           ScaffoldMessenger
+                //               .of(context)
+                //               .showSnackBar(SnackBar(content: Text('Sorry friend. Save settings failed =(')));
+                //         }
+                //         ScaffoldMessenger
+                //             .of(context)
+                //             .showSnackBar(SnackBar(content: Text('Application settings saved')));
+                //       }),
+                //
+                //
+                // ],),
 
 
                 Divider(thickness: 2,),
-
-                ExpansionPanelList(
-                    elevation: 0,
-                  expansionCallback: (int index, bool isExpanded) {
-                    setState(() {
-                      print(_showAdvanced);
-                      _showAdvanced = !_showAdvanced;
-                    });
-                  },
-                  children: [
-                    ExpansionPanel(
-                      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                        headerBuilder: (context, isOpen) {
-                          return Row(children: [
-                            SizedBox(width: 10),
-                            Icon(Icons.science_outlined),
-                            Text("Advanced")
-                          ],);
-                        },
-                        body: Column(children: [
-
-                          SwitchListTile(
-                            title: Text("Show Debug Log with Shake (default = on)"),
-                            value: widget.myUserSettings.settings.showDebugLogOnShake,
-                            onChanged: (bool newValue) { setState((){widget.myUserSettings.settings.showDebugLogOnShake = newValue;}); },
-                            secondary: const Icon(Icons.bug_report_outlined),
-                          ),
-
-                          ElevatedButton(onPressed: () async {
-                            var logConsole = LogConsole(
-                              showCloseButton: true,
-                              dark: true,
-                            );
-                            PageRoute route;
-                            if (Platform.isIOS) {
-                              route = CupertinoPageRoute(builder: (_) => logConsole);
-                            } else {
-                              route = MaterialPageRoute(builder: (_) => logConsole);
-                            }
-
-                            await Navigator.push(context, route);
-                          }, child: Text("Show Debug Log")),
-
-                          Divider(thickness: 3),
-
-                          ElevatedButton(
-                              child: Text("Export Data Backup"),
-                              onPressed: () async {
-                                FocusScope.of(context).requestFocus(new FocusNode()); //Hide keyboard
-                                // Show dialog to prevent user input
-                                await Dialogs.showPleaseWaitDialog(context, _keyLoader).timeout(Duration(milliseconds: 500)).catchError((error){});
-
-                                try {
-                                  final documentsDirectory = await getApplicationDocumentsDirectory();
-                                  final supportDirectory = await getApplicationSupportDirectory();
-
-                                  // Zip a directory to out.zip using the zipDirectory convenience method
-                                  var encoder = ZipFileEncoder();
-
-                                  // Manually create a zip of individual files
-                                  encoder.create("${supportDirectory.path}/freesk8_beta_backup.zip");
-
-                                  // Add log files
-                                  encoder.addDirectory(Directory("${documentsDirectory.path}/logs"));
-
-                                  //rideLogsFromDatabase.forEach((element)  {
-                                  //TODO: no safety checking here. Opening file must be on device
-                                  //  encoder.addFile(File("${documentsDirectory.path}${element.logFilePath}"));
-                                  //});
-
-                                  // Add the database
-                                  String path = await getDatabasesPath();
-                                  encoder.addFile(File("$path/logDatabase.db"));
-
-                                  // Add the avatars
-                                  encoder.addDirectory(Directory("${documentsDirectory.path}/avatars"));
-
-                                  // Add the userSettings export
-                                  encoder.addFile(await exportSettings('${supportDirectory.path}/freesk8_beta_userSettings.json'));
-
-                                  // Finish out zip file
-                                  encoder.close();
-
-                                  Navigator.of(context).pop(); // Remove PleaseWait dialog
-                                  await Share.file("FreeSK8 Beta Log Archive", "freesk8_beta_backup.zip", await File("${supportDirectory.path}/freesk8_beta_backup.zip").readAsBytes(), 'application/zip', text: "FreeSK8 Beta Logs");
-
-                                } catch (e, stacktrace) {
-                                  Navigator.of(context).pop(); // Remove PleaseWait dialog
-                                  globalLogger.e("Export Data Exception $e");
-                                  globalLogger.e(stacktrace.toString());
-                                  ScaffoldMessenger
-                                      .of(context)
-                                      .showSnackBar(SnackBar(content: Text("Export Exception. Please send debug log")));
-                                }
-                              }),
-
-                          ElevatedButton(
-                              child: Text("Import Data Backup (Caution!)"),
-                              onPressed: () async {
-                                FocusScope.of(context).requestFocus(new FocusNode()); //Hide keyboard
-                                // Show dialog to prevent user input
-                                await Dialogs.showPleaseWaitDialog(context, _keyLoader).timeout(Duration(milliseconds: 500)).catchError((error){});
-
-                                try {
-                                  final documentsDirectory = await getApplicationDocumentsDirectory();
-
-                                  FlutterDocumentPickerParams params = FlutterDocumentPickerParams(
-                                    allowedFileExtensions: ["zip"],
-                                    allowedMimeTypes: ["application/zip"],
-                                  );
-
-                                  String result = await FlutterDocumentPicker.openDocument(params: params);
-                                  globalLogger.d("Import Data: User imported file: $result");
-
-                                  if (result == null) {
-                                    Navigator.of(context).pop(); // Remove PleaseWait dialog
-                                    return ScaffoldMessenger
-                                        .of(context)
-                                        .showSnackBar(SnackBar(content: Text("Import Aborted: No File Specified")));
-                                  }
-
-                                  // Read the Zip file from disk.
-                                  final bytes = File(result).readAsBytesSync();
-
-                                  // Decode the Zip file
-                                  final archive = ZipDecoder().decodeBytes(bytes);
-
-                                  // Extract the contents of the Zip archive to disk.
-                                  for (final file in archive) {
-                                    final filename = file.name;
-                                    if (file.isFile) {
-                                      final data = file.content as List<int>;
-                                      File('${documentsDirectory.path}/' + filename)
-                                        ..createSync(recursive: true)
-                                        ..writeAsBytesSync(data);
-                                      print(filename);
-                                    } else {
-                                      Directory('${documentsDirectory.path}/' + filename)
-                                        ..create(recursive: true);
-                                    }
-                                  }
-
-                                  // Make sure we've extracted the a userSettings file for importing
-                                  final String importSettingsFilePath = "${documentsDirectory.path}/freesk8_beta_userSettings.json";
-                                  if (!File(importSettingsFilePath).existsSync()) {
-                                    Navigator.of(context).pop(); // Remove PleaseWait dialog
-                                    return ScaffoldMessenger
-                                        .of(context)
-                                        .showSnackBar(SnackBar(content: Text("Invalid Import File Selected")));
-                                  }
-
-                                  // Import UserSettings
-                                  if (await importSettings(importSettingsFilePath)) {
-                                    // Import Ride Log Database
-                                    String dbPath = await getDatabasesPath();
-                                    File("${documentsDirectory.path}/logDatabase.db").copy("$dbPath/logDatabase.db");
-
-                                    Navigator.of(context).pop(); // Remove PleaseWait dialog
-                                    globalLogger.d("Import Data Completed Successfully");
-                                    ScaffoldMessenger
-                                        .of(context)
-                                        .showSnackBar(SnackBar(content: Text("Import Data Completed Successfully")));
-
-                                    // Removing import files to free space and clear import state
-                                    File(importSettingsFilePath).deleteSync();
-                                    File(result).deleteSync();
-                                  } else {
-                                    globalLogger.d("Import did not finish successfully");
-                                    ScaffoldMessenger
-                                        .of(context)
-                                        .showSnackBar(SnackBar(content: Text("Import Aborted")));
-                                  }
-
-
-
-                                } catch (e, stacktrace) {
-                                  Navigator.of(context).pop(); // Remove PleaseWait dialog
-                                  globalLogger.e("Import Data Exception $e");
-                                  globalLogger.e(stacktrace.toString());
-                                  ScaffoldMessenger
-                                      .of(context)
-                                      .showSnackBar(SnackBar(content: Text("Import Exception. Please send debug log")));
-
-                                }
-                              }),
-
-                          ElevatedButton(
-                              child: Text("Open Vehicle Manager"),
-                              onPressed: () async {
-                                FocusScope.of(context).requestFocus(new FocusNode()); //Hide keyboard
-                                // Wait for the navigation to return
-                                final result = await Navigator.of(context).pushNamed(VehicleManager.routeName, arguments: VehicleManagerArguments(widget.currentDevice == null ? null : widget.currentDevice?.id.toString()));
-                                // If changes were made the result of the Navigation will be true and we'll want to reload the user settings
-                                if (result == true) {
-                                  // Request the user settings to be reloaded
-                                  widget.reloadUserSettings(result);
-                                }
-                              }),
-
-                          _showDeveloperOptions % 2 == 0 ? Container() :
-                          ElevatedButton(
-                              child: Text("Brocator"),
-                              onPressed: () async {
-                                FocusScope.of(context).requestFocus(new FocusNode()); //Hide keyboard
-                                // Wait for the navigation to return
-                                final result = await Navigator.of(context).pushNamed(Brocator.routeName, arguments: BrocatorArguments(widget.currentDevice == null ? null : widget.myUserSettings.settings.boardAlias, _boardAvatar, widget.telemetryStream, widget.theTXCharacteristic));
-                                // If changes were made the result of the Navigation will be true and we'll want to reload the user settings
-                                if (result == true) {
-                                  globalLogger.wtf(result);
-                                }
-                              }),
-                        ],),
-                      isExpanded: _showAdvanced
-                    ),
-                  ],
-                ),
+                ElevatedButton(
+                    child: Text("Open Vehicle Manager"),
+                    onPressed: () async {
+                      FocusScope.of(context).requestFocus(new FocusNode()); //Hide keyboard
+                      // Wait for the navigation to return
+                      final result = await Navigator.of(context).pushNamed(VehicleManager.routeName, arguments: VehicleManagerArguments(widget.currentDevice == null ? null : widget.currentDevice?.id.toString()));
+                      // If changes were made the result of the Navigation will be true and we'll want to reload the user settings
+                      if (result == true) {
+                        // Request the user settings to be reloaded
+                        widget.reloadUserSettings(result);
+                      }
+                    }),
+                // ExpansionPanelList(
+                //     elevation: 0,
+                //   expansionCallback: (int index, bool isExpanded) {
+                //     setState(() {
+                //       print(_showAdvanced);
+                //       _showAdvanced = !_showAdvanced;
+                //     });
+                //   },
+                //   children: [
+                //     ExpansionPanel(
+                //       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                //         headerBuilder: (context, isOpen) {
+                //           return Row(children: [
+                //             SizedBox(width: 10),
+                //             Icon(Icons.science_outlined),
+                //             Text("Advanced")
+                //           ],);
+                //         },
+                //         body: Column(children: [
+                //
+                //           SwitchListTile(
+                //             title: Text("Show Debug Log with Shake (default = on)"),
+                //             value: widget.myUserSettings.settings.showDebugLogOnShake,
+                //             onChanged: (bool newValue) { setState((){widget.myUserSettings.settings.showDebugLogOnShake = newValue;}); },
+                //             secondary: const Icon(Icons.bug_report_outlined),
+                //           ),
+                //
+                //           ElevatedButton(onPressed: () async {
+                //             var logConsole = LogConsole(
+                //               showCloseButton: true,
+                //               dark: true,
+                //             );
+                //             PageRoute route;
+                //             if (Platform.isIOS) {
+                //               route = CupertinoPageRoute(builder: (_) => logConsole);
+                //             } else {
+                //               route = MaterialPageRoute(builder: (_) => logConsole);
+                //             }
+                //
+                //             await Navigator.push(context, route);
+                //           }, child: Text("Show Debug Log")),
+                //
+                //           Divider(thickness: 3),
+                //
+                //           ElevatedButton(
+                //               child: Text("Export Data Backup"),
+                //               onPressed: () async {
+                //                 FocusScope.of(context).requestFocus(new FocusNode()); //Hide keyboard
+                //                 // Show dialog to prevent user input
+                //                 await Dialogs.showPleaseWaitDialog(context, _keyLoader).timeout(Duration(milliseconds: 500)).catchError((error){});
+                //
+                //                 try {
+                //                   final documentsDirectory = await getApplicationDocumentsDirectory();
+                //                   final supportDirectory = await getApplicationSupportDirectory();
+                //
+                //                   // Zip a directory to out.zip using the zipDirectory convenience method
+                //                   var encoder = ZipFileEncoder();
+                //
+                //                   // Manually create a zip of individual files
+                //                   encoder.create("${supportDirectory.path}/freesk8_beta_backup.zip");
+                //
+                //                   // Add log files
+                //                   encoder.addDirectory(Directory("${documentsDirectory.path}/logs"));
+                //
+                //                   //rideLogsFromDatabase.forEach((element)  {
+                //                   //TODO: no safety checking here. Opening file must be on device
+                //                   //  encoder.addFile(File("${documentsDirectory.path}${element.logFilePath}"));
+                //                   //});
+                //
+                //                   // Add the database
+                //                   String path = await getDatabasesPath();
+                //                   encoder.addFile(File("$path/logDatabase.db"));
+                //
+                //                   // Add the avatars
+                //                   encoder.addDirectory(Directory("${documentsDirectory.path}/avatars"));
+                //
+                //                   // Add the userSettings export
+                //                   encoder.addFile(await exportSettings('${supportDirectory.path}/freesk8_beta_userSettings.json'));
+                //
+                //                   // Finish out zip file
+                //                   encoder.close();
+                //
+                //                   Navigator.of(context).pop(); // Remove PleaseWait dialog
+                //                   await Share.file("FreeSK8 Beta Log Archive", "freesk8_beta_backup.zip", await File("${supportDirectory.path}/freesk8_beta_backup.zip").readAsBytes(), 'application/zip', text: "FreeSK8 Beta Logs");
+                //
+                //                 } catch (e, stacktrace) {
+                //                   Navigator.of(context).pop(); // Remove PleaseWait dialog
+                //                   globalLogger.e("Export Data Exception $e");
+                //                   globalLogger.e(stacktrace.toString());
+                //                   ScaffoldMessenger
+                //                       .of(context)
+                //                       .showSnackBar(SnackBar(content: Text("Export Exception. Please send debug log")));
+                //                 }
+                //               }),
+                //
+                //           ElevatedButton(
+                //               child: Text("Import Data Backup (Caution!)"),
+                //               onPressed: () async {
+                //                 FocusScope.of(context).requestFocus(new FocusNode()); //Hide keyboard
+                //                 // Show dialog to prevent user input
+                //                 await Dialogs.showPleaseWaitDialog(context, _keyLoader).timeout(Duration(milliseconds: 500)).catchError((error){});
+                //
+                //                 try {
+                //                   final documentsDirectory = await getApplicationDocumentsDirectory();
+                //
+                //                   FlutterDocumentPickerParams params = FlutterDocumentPickerParams(
+                //                     allowedFileExtensions: ["zip"],
+                //                     allowedMimeTypes: ["application/zip"],
+                //                   );
+                //
+                //                   String result = await FlutterDocumentPicker.openDocument(params: params);
+                //                   globalLogger.d("Import Data: User imported file: $result");
+                //
+                //                   if (result == null) {
+                //                     Navigator.of(context).pop(); // Remove PleaseWait dialog
+                //                     return ScaffoldMessenger
+                //                         .of(context)
+                //                         .showSnackBar(SnackBar(content: Text("Import Aborted: No File Specified")));
+                //                   }
+                //
+                //                   // Read the Zip file from disk.
+                //                   final bytes = File(result).readAsBytesSync();
+                //
+                //                   // Decode the Zip file
+                //                   final archive = ZipDecoder().decodeBytes(bytes);
+                //
+                //                   // Extract the contents of the Zip archive to disk.
+                //                   for (final file in archive) {
+                //                     final filename = file.name;
+                //                     if (file.isFile) {
+                //                       final data = file.content as List<int>;
+                //                       File('${documentsDirectory.path}/' + filename)
+                //                         ..createSync(recursive: true)
+                //                         ..writeAsBytesSync(data);
+                //                       print(filename);
+                //                     } else {
+                //                       Directory('${documentsDirectory.path}/' + filename)
+                //                         ..create(recursive: true);
+                //                     }
+                //                   }
+                //
+                //                   // Make sure we've extracted the a userSettings file for importing
+                //                   final String importSettingsFilePath = "${documentsDirectory.path}/freesk8_beta_userSettings.json";
+                //                   if (!File(importSettingsFilePath).existsSync()) {
+                //                     Navigator.of(context).pop(); // Remove PleaseWait dialog
+                //                     return ScaffoldMessenger
+                //                         .of(context)
+                //                         .showSnackBar(SnackBar(content: Text("Invalid Import File Selected")));
+                //                   }
+                //
+                //                   // Import UserSettings
+                //                   if (await importSettings(importSettingsFilePath)) {
+                //                     // Import Ride Log Database
+                //                     String dbPath = await getDatabasesPath();
+                //                     File("${documentsDirectory.path}/logDatabase.db").copy("$dbPath/logDatabase.db");
+                //
+                //                     Navigator.of(context).pop(); // Remove PleaseWait dialog
+                //                     globalLogger.d("Import Data Completed Successfully");
+                //                     ScaffoldMessenger
+                //                         .of(context)
+                //                         .showSnackBar(SnackBar(content: Text("Import Data Completed Successfully")));
+                //
+                //                     // Removing import files to free space and clear import state
+                //                     File(importSettingsFilePath).deleteSync();
+                //                     File(result).deleteSync();
+                //                   } else {
+                //                     globalLogger.d("Import did not finish successfully");
+                //                     ScaffoldMessenger
+                //                         .of(context)
+                //                         .showSnackBar(SnackBar(content: Text("Import Aborted")));
+                //                   }
+                //
+                //
+                //
+                //                 } catch (e, stacktrace) {
+                //                   Navigator.of(context).pop(); // Remove PleaseWait dialog
+                //                   globalLogger.e("Import Data Exception $e");
+                //                   globalLogger.e(stacktrace.toString());
+                //                   ScaffoldMessenger
+                //                       .of(context)
+                //                       .showSnackBar(SnackBar(content: Text("Import Exception. Please send debug log")));
+                //
+                //                 }
+                //               }),
+                //
+                //           ElevatedButton(
+                //               child: Text("Open Vehicle Manager"),
+                //               onPressed: () async {
+                //                 FocusScope.of(context).requestFocus(new FocusNode()); //Hide keyboard
+                //                 // Wait for the navigation to return
+                //                 final result = await Navigator.of(context).pushNamed(VehicleManager.routeName, arguments: VehicleManagerArguments(widget.currentDevice == null ? null : widget.currentDevice?.id.toString()));
+                //                 // If changes were made the result of the Navigation will be true and we'll want to reload the user settings
+                //                 if (result == true) {
+                //                   // Request the user settings to be reloaded
+                //                   widget.reloadUserSettings(result);
+                //                 }
+                //               }),
+                //
+                //           _showDeveloperOptions % 2 == 0 ? Container() :
+                //           ElevatedButton(
+                //               child: Text("Brocator"),
+                //               onPressed: () async {
+                //                 FocusScope.of(context).requestFocus(new FocusNode()); //Hide keyboard
+                //                 // Wait for the navigation to return
+                //                 final result = await Navigator.of(context).pushNamed(Brocator.routeName, arguments: BrocatorArguments(widget.currentDevice == null ? null : widget.myUserSettings.settings.boardAlias, _boardAvatar, widget.telemetryStream, widget.theTXCharacteristic));
+                //                 // If changes were made the result of the Navigation will be true and we'll want to reload the user settings
+                //                 if (result == true) {
+                //                   globalLogger.wtf(result);
+                //                 }
+                //               }),
+                //         ],),
+                //       isExpanded: _showAdvanced
+                //     ),
+                //   ],
+                // ),
 
 
               ],

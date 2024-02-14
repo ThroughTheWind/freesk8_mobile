@@ -722,8 +722,8 @@ class InputConfigurationEditorState extends State<InputConfigurationEditor> {
                 padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                 children: <Widget>[
 
-                  Divider(thickness: 3),
-                  Text("Select Application Mode"),
+                  // Divider(thickness: 3),
+                  // Text("Select Application Mode"),
                   // Center(child:
                   // DropdownButton<ListItem>(
                   //   value: _selectedAppMode,
@@ -744,7 +744,7 @@ class InputConfigurationEditorState extends State<InputConfigurationEditor> {
                   // Show Balance Options
                   showBalanceConfiguration ? Column(
                     children: [
-                      Divider(thickness: 3),
+                      // Divider(thickness: 3),
                       Text("${escInputConfiguration.imu_conf.mode}"),
                       TextField(
                           controller: tecIMUHz,
@@ -1160,12 +1160,12 @@ class InputConfigurationEditorState extends State<InputConfigurationEditor> {
                                     secondary: const Icon(Icons.sync),
                                   ),
 
-                                  SwitchListTile(
-                                    title: Text("Multiple ESC over CAN (default = on)"),
-                                    value: escInputConfiguration.app_adc_conf.multi_esc,
-                                    onChanged: (bool newValue) { setState((){ escInputConfiguration.app_adc_conf.multi_esc = newValue;}); },
-                                    secondary: const Icon(Icons.settings_ethernet),
-                                  ),
+                                  // SwitchListTile(
+                                  //   title: Text("Multiple ESC over CAN (default = on)"),
+                                  //   value: escInputConfiguration.app_adc_conf.multi_esc,
+                                  //   onChanged: (bool newValue) { setState((){ escInputConfiguration.app_adc_conf.multi_esc = newValue;}); },
+                                  //   secondary: const Icon(Icons.settings_ethernet),
+                                  // ),
 
                                   ElevatedButton(onPressed: (){
                                     setState(() {
@@ -1263,25 +1263,25 @@ class InputConfigurationEditorState extends State<InputConfigurationEditor> {
                           },
                         ),
 
-                        SwitchListTile(
-                          title: Text("Enable Traction Control"),
-                          value: escInputConfiguration.app_adc_conf.tc,
-                          onChanged: (bool newValue) { setState((){ escInputConfiguration.app_adc_conf.tc = newValue;}); },
-                          secondary: const Icon(Icons.compare_arrows),
-                        ),
-                        Text("Traction Control ERPM ${escInputConfiguration.app_adc_conf.tc_max_diff.toInt()} (3000 = default)"),
-                        SmartSlider(
-                          value: escInputConfiguration.app_adc_conf.tc_max_diff,
-                          mini: 1000.0,
-                          maxi: 5000.0,
-                          divisions: 1000,
-                          label: "${escInputConfiguration.app_adc_conf.tc_max_diff}",
-                          onChanged: (value) {
-                            setState(() {
-                              escInputConfiguration.app_adc_conf.tc_max_diff = value.toInt().toDouble();
-                            });
-                          },
-                        ),
+                        // SwitchListTile(
+                        //   title: Text("Enable Traction Control"),
+                        //   value: escInputConfiguration.app_adc_conf.tc,
+                        //   onChanged: (bool newValue) { setState((){ escInputConfiguration.app_adc_conf.tc = newValue;}); },
+                        //   secondary: const Icon(Icons.compare_arrows),
+                        // ),
+                        // Text("Traction Control ERPM ${escInputConfiguration.app_adc_conf.tc_max_diff.toInt()} (3000 = default)"),
+                        // SmartSlider(
+                        //   value: escInputConfiguration.app_adc_conf.tc_max_diff,
+                        //   mini: 1000.0,
+                        //   maxi: 5000.0,
+                        //   divisions: 1000,
+                        //   label: "${escInputConfiguration.app_adc_conf.tc_max_diff}",
+                        //   onChanged: (value) {
+                        //     setState(() {
+                        //       escInputConfiguration.app_adc_conf.tc_max_diff = value.toInt().toDouble();
+                        //     });
+                        //   },
+                        // ),
 
                       ]) : Container(),
 
@@ -1670,7 +1670,7 @@ class InputConfigurationEditorState extends State<InputConfigurationEditor> {
 
                   showNunchukConfiguration ? Column(
                       children: [
-                        Divider(thickness: 3),
+                        //Divider(thickness: 3),
                         // Text("UART Config"),
                         //
                         // Center(child:
@@ -1702,43 +1702,43 @@ class InputConfigurationEditorState extends State<InputConfigurationEditor> {
                         ),
 
                         // Smart reverse doesn't work in Current Bidirectional mode
-                        escInputConfiguration.app_chuk_conf.ctrl_type != chuk_control_type.CHUK_CTRL_TYPE_CURRENT_BIDIRECTIONAL ?
-                        Column(children: [
-                          SwitchListTile(
-                            title: Text("Smart Reverse (default = on)"),
-                            value: escInputConfiguration.app_chuk_conf.use_smart_rev,
-                            onChanged: (bool newValue) { setState((){ escInputConfiguration.app_chuk_conf.use_smart_rev = newValue;}); },
-                            secondary: const Icon(Icons.filter_tilt_shift),
-                          ),
-
-                          Text("Smart Reverse Max Duty Cycle ${(escInputConfiguration.app_chuk_conf.smart_rev_max_duty * 100).toInt()}% (7% = default)"),
-                          Slider(
-                            value: escInputConfiguration.app_chuk_conf.smart_rev_max_duty,
-                            min: 0,
-                            max: 1,
-                            divisions: 100,
-                            label: "${(escInputConfiguration.app_chuk_conf.smart_rev_max_duty * 100).toInt()}%",
-                            onChanged: (value) {
-                              setState(() {
-                                escInputConfiguration.app_chuk_conf.smart_rev_max_duty = value;
-                              });
-                            },
-                          ),
-
-                          Text("Smart Reverse Ramp Time ${escInputConfiguration.app_chuk_conf.smart_rev_ramp_time} seconds (3.0 = default)"),
-                          SmartSlider(
-                            value: escInputConfiguration.app_chuk_conf.smart_rev_ramp_time,
-                            mini: 1,
-                            maxi: 10,
-                            divisions: 90,
-                            label: "${escInputConfiguration.app_chuk_conf.smart_rev_ramp_time}",
-                            onChanged: (value) {
-                              setState(() {
-                                escInputConfiguration.app_chuk_conf.smart_rev_ramp_time = value;
-                              });
-                            },
-                          ),
-                        ]) : Container(),
+                        // escInputConfiguration.app_chuk_conf.ctrl_type != chuk_control_type.CHUK_CTRL_TYPE_CURRENT_BIDIRECTIONAL ?
+                        // Column(children: [
+                        //   SwitchListTile(
+                        //     title: Text("Smart Reverse (default = on)"),
+                        //     value: escInputConfiguration.app_chuk_conf.use_smart_rev,
+                        //     onChanged: (bool newValue) { setState((){ escInputConfiguration.app_chuk_conf.use_smart_rev = newValue;}); },
+                        //     secondary: const Icon(Icons.filter_tilt_shift),
+                        //   ),
+                        //
+                        //   Text("Smart Reverse Max Duty Cycle ${(escInputConfiguration.app_chuk_conf.smart_rev_max_duty * 100).toInt()}% (7% = default)"),
+                        //   Slider(
+                        //     value: escInputConfiguration.app_chuk_conf.smart_rev_max_duty,
+                        //     min: 0,
+                        //     max: 1,
+                        //     divisions: 100,
+                        //     label: "${(escInputConfiguration.app_chuk_conf.smart_rev_max_duty * 100).toInt()}%",
+                        //     onChanged: (value) {
+                        //       setState(() {
+                        //         escInputConfiguration.app_chuk_conf.smart_rev_max_duty = value;
+                        //       });
+                        //     },
+                        //   ),
+                        //
+                        //   Text("Smart Reverse Ramp Time ${escInputConfiguration.app_chuk_conf.smart_rev_ramp_time} seconds (3.0 = default)"),
+                        //   SmartSlider(
+                        //     value: escInputConfiguration.app_chuk_conf.smart_rev_ramp_time,
+                        //     mini: 1,
+                        //     maxi: 10,
+                        //     divisions: 90,
+                        //     label: "${escInputConfiguration.app_chuk_conf.smart_rev_ramp_time}",
+                        //     onChanged: (value) {
+                        //       setState(() {
+                        //         escInputConfiguration.app_chuk_conf.smart_rev_ramp_time = value;
+                        //       });
+                        //     },
+                        //   ),
+                        // ]) : Container(),
 
 
                         ElevatedButton(onPressed: (){
@@ -1836,41 +1836,41 @@ class InputConfigurationEditorState extends State<InputConfigurationEditor> {
                             ),
 
 
-                            SwitchListTile(
-                              title: Text("Enable Traction Control"),
-                              value: escInputConfiguration.app_chuk_conf.tc,
-                              onChanged: (bool newValue) { setState((){ escInputConfiguration.app_chuk_conf.tc = newValue;}); },
-                              secondary: const Icon(Icons.compare_arrows),
-                            ),
-
-                            Text("Traction Control ERPM ${escInputConfiguration.app_chuk_conf.tc_max_diff} (3000 = default)"),
-                            SmartSlider(
-                              value: escInputConfiguration.app_chuk_conf.tc_max_diff,
-                              mini: 1000.0,
-                              maxi: 5000.0,
-                              divisions: 1000,
-                              label: "${escInputConfiguration.app_chuk_conf.tc_max_diff}",
-                              onChanged: (value) {
-                                setState(() {
-                                  escInputConfiguration.app_chuk_conf.tc_max_diff = value.toInt().toDouble();
-                                });
-                              },
-                            ),
-
-                            SwitchListTile(
-                              title: Text("Multiple ESC over CAN (default = on"),
-                              value: escInputConfiguration.app_chuk_conf.multi_esc,
-                              onChanged: (bool newValue) { setState((){ escInputConfiguration.app_chuk_conf.multi_esc = newValue;}); },
-                              secondary: const Icon(Icons.settings_ethernet),
-                            ),
+                            // SwitchListTile(
+                            //   title: Text("Enable Traction Control"),
+                            //   value: escInputConfiguration.app_chuk_conf.tc,
+                            //   onChanged: (bool newValue) { setState((){ escInputConfiguration.app_chuk_conf.tc = newValue;}); },
+                            //   secondary: const Icon(Icons.compare_arrows),
+                            // ),
+                            //
+                            // Text("Traction Control ERPM ${escInputConfiguration.app_chuk_conf.tc_max_diff} (3000 = default)"),
+                            // SmartSlider(
+                            //   value: escInputConfiguration.app_chuk_conf.tc_max_diff,
+                            //   mini: 1000.0,
+                            //   maxi: 5000.0,
+                            //   divisions: 1000,
+                            //   label: "${escInputConfiguration.app_chuk_conf.tc_max_diff}",
+                            //   onChanged: (value) {
+                            //     setState(() {
+                            //       escInputConfiguration.app_chuk_conf.tc_max_diff = value.toInt().toDouble();
+                            //     });
+                            //   },
+                            // ),
+                            //
+                            // SwitchListTile(
+                            //   title: Text("Multiple ESC over CAN (default = on"),
+                            //   value: escInputConfiguration.app_chuk_conf.multi_esc,
+                            //   onChanged: (bool newValue) { setState((){ escInputConfiguration.app_chuk_conf.multi_esc = newValue;}); },
+                            //   secondary: const Icon(Icons.settings_ethernet),
+                            // ),
 
                           ],) : Container(),
 
-                        showAdvancedOptions ? ElevatedButton(onPressed: (){
-                          setState(() {
-                            showAdvancedOptions = false;
-                          });
-                        }, child: Text("Hide Advanced Options"),) : Container(),
+                        // showAdvancedOptions ? ElevatedButton(onPressed: (){
+                        //   setState(() {
+                        //     showAdvancedOptions = false;
+                        //   });
+                        // }, child: Text("Hide Advanced Options"),) : Container(),
 
 
                       ]
