@@ -2679,169 +2679,169 @@ class MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin {
         },
       ),
 
-      ListTile(
-        leading: Icon(Icons.settings_applications),
-        title: Text("Motor Configuration"),
-        onTap: () async {
-          if (menuOptionIsReady(isRobogotchiOption: false)) {
-            _preNavigationTasks();
-
-            // Wait for the navigation to return
-            final result = await Navigator.of(context).pushNamed(
-                MotorConfigurationEditor.routeName,
-                arguments: MotorConfigurationArguments(
-                  dataStream: mcconfStream.stream,
-                  theTXCharacteristic: theTXCharacteristic,
-                  motorConfiguration: escMotorConfiguration,
-                  discoveredCANDevices: _validCANBusDeviceIDs,
-                  escFirmwareVersion: escFirmwareVersion,
-                ));
-            requestMCCONF(); // Get Motor Configuration after editing
-
-            _postNavigationTasks();
-          }
-        },
-      ),
-      ListTile(
-        leading: Icon(Icons.settings),
-        title: Text("Logging Config"),
-        onTap: () {
-          if (menuOptionIsReady(isRobogotchiOption: true)) {
-            sendBLEData(theTXLoggerCharacteristic, utf8.encode("getcfg~"), false);
-          }
-        },
-      ),
-      Divider(height: 5, thickness: 3),
-      ListTile(
-        leading: Icon(Icons.devices),
-        title: Text("Robogotchi Updater"),
-        onLongPress: (){
-          if (_connectedDevice == null) {
-            Navigator.of(context).pop();
-            // navigate to the route
-            Navigator.of(context).pushNamed(RobogotchiDFU.routeName, arguments: null);
-            genericAlert(context, "Hey there 👋", Text("We are not connected to a Robogotchi which means I can't prepare it for update mode.\n\nI'll search for devices anyway but you'll probably want to turn back now."), "Ok 👍");
-          }
-        },
-        onTap: () {
-          // Don't write if not connected
-          if (menuOptionIsReady(isRobogotchiOption: true) && (_deviceIsGotchiPro == false)) {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text('Ready to update?'),
-                  content: SingleChildScrollView(
-                    child: ListBody(
-                      children: <Widget>[
-                        Text('Selecting YES will put your Robogotchi into update mode.'),
-                        SizedBox(height:10),
-                        Text('This process typically takes 1-2 minutes')
-                      ],
-                    ),
-                  ),
-                  actions: <Widget>[
-                    TextButton(
-                      child: Text('No thank you.'),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                    TextButton(
-                      child: Text('YES'),
-                      onPressed: () async {
-                        await theTXLoggerCharacteristic.write(utf8.encode("dfumode~")).timeout(Duration(milliseconds: 500)).whenComplete((){
-                          globalLogger.d('Robogotchi DFU Mode Command Executed');
-
-                          Navigator.of(context).pop();
-
-                          _bleDisconnect();
-
-                          // navigate to the route
-                          Navigator.of(context).pushNamed(RobogotchiDFU.routeName, arguments: null);
-                        }).catchError((e){
-                          globalLogger.e("Firmware Update: Exception: $e");
-                        });
-                      },
-                    ),
-                  ],
-                );
-              },
-            );
-          }
-        },
-      ),
-
-      ListTile(
-        leading: Icon(Icons.devices),
-        title: Text("gotchiPro Updater"),
-        onLongPress: (){
-          if (_connectedDevice == null) {
-            Navigator.of(context).pop();
-            // navigate to the route
-            Navigator.of(context).pushNamed(gotchiProOTA.routeName, arguments: null);
-            genericAlert(context, "Hey there 👋", Text("We are not connected to a gotchiPro which means I can't prepare it for update mode.\n\nI'll search for devices anyway but you'll probably want to turn back now."), "Ok 👍");
-          }
-        },
-        onTap: () {
-          // Don't write if not connected
-          if (menuOptionIsReady(isRobogotchiOption: true) && (_deviceIsGotchiPro == true)) {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text('Ready to update?'),
-                  content: SingleChildScrollView(
-                    child: ListBody(
-                      children: <Widget>[
-                        Text('Selecting YES will put your gotchiPro into an automatic update mode.'),
-                        SizedBox(height:10),
-                        Text('This process typically takes 3-4 minutes, your gotchiPro will disconnect from BLE and updated on its own, rebooting & playing a startup melody when complete. You can reconnect to the gotchiPro then.')
-                      ],
-                    ),
-                  ),
-                  actions: <Widget>[
-                    TextButton(
-                      child: Text('No thank you.'),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                    TextButton(
-                      child: Text('YES'),
-                      onPressed: () async {
-                        await theTXLoggerCharacteristic.write(utf8.encode("otamode~")).timeout(Duration(milliseconds: 500)).whenComplete((){
-                          globalLogger.d('gotchiPro OTA Command Executed');
-
-                          Navigator.of(context).pop();
-
-                          _bleDisconnect();
-
-                          // navigate to the route
-                          Navigator.of(context).pushNamed(gotchiProOTA.routeName, arguments: null);
-                        }).catchError((e){
-                          globalLogger.e("Firmware Update: Exception: $e");
-                        });
-                      },
-                    ),
-                  ],
-                );
-              },
-            );
-          }
-        },
-      ),
-
-      ListTile(
-        leading: Icon(Icons.settings),
-        title: Text("sk8net Config"),
-        onTap: () {
-          if (menuOptionIsReady(isRobogotchiOption: true) && (_deviceIsGotchiPro == true)) {
-            sendBLEData(theTXLoggerCharacteristic, utf8.encode("getnetcfg~"), false);
-          }
-        },
-      ),
-      Divider(thickness: 3),
+      // ListTile(
+      //   leading: Icon(Icons.settings_applications),
+      //   title: Text("Motor Configuration"),
+      //   onTap: () async {
+      //     if (menuOptionIsReady(isRobogotchiOption: false)) {
+      //       _preNavigationTasks();
+      //
+      //       // Wait for the navigation to return
+      //       final result = await Navigator.of(context).pushNamed(
+      //           MotorConfigurationEditor.routeName,
+      //           arguments: MotorConfigurationArguments(
+      //             dataStream: mcconfStream.stream,
+      //             theTXCharacteristic: theTXCharacteristic,
+      //             motorConfiguration: escMotorConfiguration,
+      //             discoveredCANDevices: _validCANBusDeviceIDs,
+      //             escFirmwareVersion: escFirmwareVersion,
+      //           ));
+      //       requestMCCONF(); // Get Motor Configuration after editing
+      //
+      //       _postNavigationTasks();
+      //     }
+      //   },
+      // ),
+      // ListTile(
+      //   leading: Icon(Icons.settings),
+      //   title: Text("Logging Config"),
+      //   onTap: () {
+      //     if (menuOptionIsReady(isRobogotchiOption: true)) {
+      //       sendBLEData(theTXLoggerCharacteristic, utf8.encode("getcfg~"), false);
+      //     }
+      //   },
+      // ),
+      // Divider(height: 5, thickness: 3),
+      // ListTile(
+      //   leading: Icon(Icons.devices),
+      //   title: Text("Robogotchi Updater"),
+      //   onLongPress: (){
+      //     if (_connectedDevice == null) {
+      //       Navigator.of(context).pop();
+      //       // navigate to the route
+      //       Navigator.of(context).pushNamed(RobogotchiDFU.routeName, arguments: null);
+      //       genericAlert(context, "Hey there 👋", Text("We are not connected to a Robogotchi which means I can't prepare it for update mode.\n\nI'll search for devices anyway but you'll probably want to turn back now."), "Ok 👍");
+      //     }
+      //   },
+      //   onTap: () {
+      //     // Don't write if not connected
+      //     if (menuOptionIsReady(isRobogotchiOption: true) && (_deviceIsGotchiPro == false)) {
+      //       showDialog(
+      //         context: context,
+      //         builder: (BuildContext context) {
+      //           return AlertDialog(
+      //             title: Text('Ready to update?'),
+      //             content: SingleChildScrollView(
+      //               child: ListBody(
+      //                 children: <Widget>[
+      //                   Text('Selecting YES will put your Robogotchi into update mode.'),
+      //                   SizedBox(height:10),
+      //                   Text('This process typically takes 1-2 minutes')
+      //                 ],
+      //               ),
+      //             ),
+      //             actions: <Widget>[
+      //               TextButton(
+      //                 child: Text('No thank you.'),
+      //                 onPressed: () {
+      //                   Navigator.of(context).pop();
+      //                 },
+      //               ),
+      //               TextButton(
+      //                 child: Text('YES'),
+      //                 onPressed: () async {
+      //                   await theTXLoggerCharacteristic.write(utf8.encode("dfumode~")).timeout(Duration(milliseconds: 500)).whenComplete((){
+      //                     globalLogger.d('Robogotchi DFU Mode Command Executed');
+      //
+      //                     Navigator.of(context).pop();
+      //
+      //                     _bleDisconnect();
+      //
+      //                     // navigate to the route
+      //                     Navigator.of(context).pushNamed(RobogotchiDFU.routeName, arguments: null);
+      //                   }).catchError((e){
+      //                     globalLogger.e("Firmware Update: Exception: $e");
+      //                   });
+      //                 },
+      //               ),
+      //             ],
+      //           );
+      //         },
+      //       );
+      //     }
+      //   },
+      // ),
+      //
+      // ListTile(
+      //   leading: Icon(Icons.devices),
+      //   title: Text("gotchiPro Updater"),
+      //   onLongPress: (){
+      //     if (_connectedDevice == null) {
+      //       Navigator.of(context).pop();
+      //       // navigate to the route
+      //       Navigator.of(context).pushNamed(gotchiProOTA.routeName, arguments: null);
+      //       genericAlert(context, "Hey there 👋", Text("We are not connected to a gotchiPro which means I can't prepare it for update mode.\n\nI'll search for devices anyway but you'll probably want to turn back now."), "Ok 👍");
+      //     }
+      //   },
+      //   onTap: () {
+      //     // Don't write if not connected
+      //     if (menuOptionIsReady(isRobogotchiOption: true) && (_deviceIsGotchiPro == true)) {
+      //       showDialog(
+      //         context: context,
+      //         builder: (BuildContext context) {
+      //           return AlertDialog(
+      //             title: Text('Ready to update?'),
+      //             content: SingleChildScrollView(
+      //               child: ListBody(
+      //                 children: <Widget>[
+      //                   Text('Selecting YES will put your gotchiPro into an automatic update mode.'),
+      //                   SizedBox(height:10),
+      //                   Text('This process typically takes 3-4 minutes, your gotchiPro will disconnect from BLE and updated on its own, rebooting & playing a startup melody when complete. You can reconnect to the gotchiPro then.')
+      //                 ],
+      //               ),
+      //             ),
+      //             actions: <Widget>[
+      //               TextButton(
+      //                 child: Text('No thank you.'),
+      //                 onPressed: () {
+      //                   Navigator.of(context).pop();
+      //                 },
+      //               ),
+      //               TextButton(
+      //                 child: Text('YES'),
+      //                 onPressed: () async {
+      //                   await theTXLoggerCharacteristic.write(utf8.encode("otamode~")).timeout(Duration(milliseconds: 500)).whenComplete((){
+      //                     globalLogger.d('gotchiPro OTA Command Executed');
+      //
+      //                     Navigator.of(context).pop();
+      //
+      //                     _bleDisconnect();
+      //
+      //                     // navigate to the route
+      //                     Navigator.of(context).pushNamed(gotchiProOTA.routeName, arguments: null);
+      //                   }).catchError((e){
+      //                     globalLogger.e("Firmware Update: Exception: $e");
+      //                   });
+      //                 },
+      //               ),
+      //             ],
+      //           );
+      //         },
+      //       );
+      //     }
+      //   },
+      // ),
+      //
+      // ListTile(
+      //   leading: Icon(Icons.settings),
+      //   title: Text("sk8net Config"),
+      //   onTap: () {
+      //     if (menuOptionIsReady(isRobogotchiOption: true) && (_deviceIsGotchiPro == true)) {
+      //       sendBLEData(theTXLoggerCharacteristic, utf8.encode("getnetcfg~"), false);
+      //     }
+      //   },
+      // ),
+      // Divider(thickness: 3),
 
       ListTile(
         leading: Icon(Icons.share_outlined),

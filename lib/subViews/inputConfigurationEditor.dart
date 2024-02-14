@@ -724,21 +724,21 @@ class InputConfigurationEditorState extends State<InputConfigurationEditor> {
 
                   Divider(thickness: 3),
                   Text("Select Application Mode"),
-                  Center(child:
-                  DropdownButton<ListItem>(
-                    value: _selectedAppMode,
-                    items: _appModeDropdownItems,
-                    onChanged: (newValue) {
-                      setState(() {
-                        _selectedAppMode = newValue;
-                        escInputConfiguration.app_to_use = app_use.values[newValue.value];
-                        showPPMConfiguration = escInputConfiguration.app_to_use == app_use.APP_PPM_UART;
-                        showNunchukConfiguration = escInputConfiguration.app_to_use == app_use.APP_UART;
-                        showBalanceConfiguration = escInputConfiguration.app_to_use == app_use.APP_BALANCE;
-                      });
-                    },
-                  )
-                  ),
+                  // Center(child:
+                  // DropdownButton<ListItem>(
+                  //   value: _selectedAppMode,
+                  //   items: _appModeDropdownItems,
+                  //   onChanged: (newValue) {
+                  //     setState(() {
+                  //       _selectedAppMode = newValue;
+                  //       escInputConfiguration.app_to_use = app_use.values[newValue.value];
+                  //       showPPMConfiguration = escInputConfiguration.app_to_use == app_use.APP_PPM_UART;
+                  //       showNunchukConfiguration = escInputConfiguration.app_to_use == app_use.APP_UART;
+                  //       showBalanceConfiguration = escInputConfiguration.app_to_use == app_use.APP_BALANCE;
+                  //     });
+                  //   },
+                  // )
+                  // ),
                   //TODO: User control needed? Text("app can ${escInputConfiguration.can_mode}"),
 
                   // Show Balance Options
@@ -1549,32 +1549,32 @@ class InputConfigurationEditorState extends State<InputConfigurationEditor> {
                               });
                             },
                           ),
-                          Text("Smart Reverse Max Duty Cycle ${doublePrecision(escInputConfiguration.app_ppm_conf.smart_rev_max_duty,2)} (0.07 = default)"),
-                          Slider(
-                            value: escInputConfiguration.app_ppm_conf.smart_rev_max_duty,
-                            min: 0,
-                            max: 1,
-                            divisions: 100,
-                            label: "${escInputConfiguration.app_ppm_conf.smart_rev_max_duty}",
-                            onChanged: (value) {
-                              setState(() {
-                                escInputConfiguration.app_ppm_conf.smart_rev_max_duty = value;
-                              });
-                            },
-                          ),
-                          Text("Smart Reverse Ramp Time ${escInputConfiguration.app_ppm_conf.smart_rev_ramp_time} seconds (3.0 = default)"),
-                          SmartSlider(
-                            value: escInputConfiguration.app_ppm_conf.smart_rev_ramp_time,
-                            mini: 1,
-                            maxi: 10,
-                            divisions: 1000,
-                            label: "${escInputConfiguration.app_ppm_conf.smart_rev_ramp_time}",
-                            onChanged: (value) {
-                              setState(() {
-                                escInputConfiguration.app_ppm_conf.smart_rev_ramp_time = value;
-                              });
-                            },
-                          ),
+                          // Text("Smart Reverse Max Duty Cycle ${doublePrecision(escInputConfiguration.app_ppm_conf.smart_rev_max_duty,2)} (0.07 = default)"),
+                          // Slider(
+                          //   value: escInputConfiguration.app_ppm_conf.smart_rev_max_duty,
+                          //   min: 0,
+                          //   max: 1,
+                          //   divisions: 100,
+                          //   label: "${escInputConfiguration.app_ppm_conf.smart_rev_max_duty}",
+                          //   onChanged: (value) {
+                          //     setState(() {
+                          //       escInputConfiguration.app_ppm_conf.smart_rev_max_duty = value;
+                          //     });
+                          //   },
+                          // ),
+                          // Text("Smart Reverse Ramp Time ${escInputConfiguration.app_ppm_conf.smart_rev_ramp_time} seconds (3.0 = default)"),
+                          // SmartSlider(
+                          //   value: escInputConfiguration.app_ppm_conf.smart_rev_ramp_time,
+                          //   mini: 1,
+                          //   maxi: 10,
+                          //   divisions: 1000,
+                          //   label: "${escInputConfiguration.app_ppm_conf.smart_rev_ramp_time}",
+                          //   onChanged: (value) {
+                          //     setState(() {
+                          //       escInputConfiguration.app_ppm_conf.smart_rev_ramp_time = value;
+                          //     });
+                          //   },
+                          // ),
 
                           Text("Select Throttle Exponential Mode"),
                           Center(child:
@@ -1630,33 +1630,33 @@ class InputConfigurationEditorState extends State<InputConfigurationEditor> {
                           ),
 
 
-                          SwitchListTile(
-                            title: Text("Enable Traction Control"),
-                            value: escInputConfiguration.app_ppm_conf.tc,
-                            onChanged: (bool newValue) { setState((){ escInputConfiguration.app_ppm_conf.tc = newValue;}); },
-                            secondary: const Icon(Icons.compare_arrows),
-                          ),
-                          //Text("traction control ${escInputConfiguration.app_ppm_conf.tc}"),
-                          Text("Traction Control ERPM ${escInputConfiguration.app_ppm_conf.tc_max_diff} (3000 = default)"),
-                          SmartSlider(
-                            value: escInputConfiguration.app_ppm_conf.tc_max_diff,
-                            mini: 1000.0,
-                            maxi: 5000.0,
-                            divisions: 1000,
-                            label: "${escInputConfiguration.app_ppm_conf.tc_max_diff}",
-                            onChanged: (value) {
-                              setState(() {
-                                escInputConfiguration.app_ppm_conf.tc_max_diff = value.toInt().toDouble();
-                              });
-                            },
-                          ),
-
-                          SwitchListTile(
-                            title: Text("Multiple ESC over CAN (default = on)"),
-                            value: escInputConfiguration.app_ppm_conf.multi_esc,
-                            onChanged: (bool newValue) { setState((){ escInputConfiguration.app_ppm_conf.multi_esc = newValue;}); },
-                            secondary: const Icon(Icons.settings_ethernet),
-                          ),
+                          // SwitchListTile(
+                          //   title: Text("Enable Traction Control"),
+                          //   value: escInputConfiguration.app_ppm_conf.tc,
+                          //   onChanged: (bool newValue) { setState((){ escInputConfiguration.app_ppm_conf.tc = newValue;}); },
+                          //   secondary: const Icon(Icons.compare_arrows),
+                          // ),
+                          // //Text("traction control ${escInputConfiguration.app_ppm_conf.tc}"),
+                          // Text("Traction Control ERPM ${escInputConfiguration.app_ppm_conf.tc_max_diff} (3000 = default)"),
+                          // SmartSlider(
+                          //   value: escInputConfiguration.app_ppm_conf.tc_max_diff,
+                          //   mini: 1000.0,
+                          //   maxi: 5000.0,
+                          //   divisions: 1000,
+                          //   label: "${escInputConfiguration.app_ppm_conf.tc_max_diff}",
+                          //   onChanged: (value) {
+                          //     setState(() {
+                          //       escInputConfiguration.app_ppm_conf.tc_max_diff = value.toInt().toDouble();
+                          //     });
+                          //   },
+                          // ),
+                          //
+                          // SwitchListTile(
+                          //   title: Text("Multiple ESC over CAN (default = on)"),
+                          //   value: escInputConfiguration.app_ppm_conf.multi_esc,
+                          //   onChanged: (bool newValue) { setState((){ escInputConfiguration.app_ppm_conf.multi_esc = newValue;}); },
+                          //   secondary: const Icon(Icons.settings_ethernet),
+                          // ),
 
                         ],) : Container(),
 
@@ -1671,20 +1671,20 @@ class InputConfigurationEditorState extends State<InputConfigurationEditor> {
                   showNunchukConfiguration ? Column(
                       children: [
                         Divider(thickness: 3),
-                        Text("UART Config"),
-
-                        Center(child:
-                        DropdownButton<ListItem>(
-                          value: _selectedNunchukCtrlType,
-                          items: _nunchuckCtrlTypeDropdownItems,
-                          onChanged: (newValue) {
-                            setState(() {
-                              _selectedNunchukCtrlType = newValue;
-                              escInputConfiguration.app_chuk_conf.ctrl_type = chuk_control_type.values[newValue.value];
-                            });
-                          },
-                        )
-                        ),
+                        // Text("UART Config"),
+                        //
+                        // Center(child:
+                        // DropdownButton<ListItem>(
+                        //   value: _selectedNunchukCtrlType,
+                        //   items: _nunchuckCtrlTypeDropdownItems,
+                        //   onChanged: (newValue) {
+                        //     setState(() {
+                        //       _selectedNunchukCtrlType = newValue;
+                        //       escInputConfiguration.app_chuk_conf.ctrl_type = chuk_control_type.values[newValue.value];
+                        //     });
+                        //   },
+                        // )
+                        // ),
 
 
                         Text("Input deadband: ${(escInputConfiguration.app_chuk_conf.hyst * 100).toInt()}% (15% = default)"),
@@ -1921,45 +1921,45 @@ class InputConfigurationEditorState extends State<InputConfigurationEditor> {
                         });
                       }) : Container(),
                   Divider(height: 10,),
-                  Center(child: Text("Additional Tools"),),
-                  Row( mainAxisAlignment: MainAxisAlignment.spaceBetween ,
-                      children: <Widget>[
-                        ElevatedButton(
-                          //TODO: quick pair for CAN FWD device?
-                            child: Row(children: <Widget>[
-                              Icon(Icons.settings_remote),
-                              Text("nRF Quick Pair")
-                            ],),
-                            onPressed: () {
-                              // Don't write if not connected
-                              if (theTXCharacteristic != null) {
-                                var byteData = new ByteData(10); //<start><payloadLen><packetID><int32_milliseconds><crc1><crc2><end>
-                                byteData.setUint8(0, 0x02);
-                                byteData.setUint8(1, 0x05);
-                                byteData.setUint8(2, COMM_PACKET_ID.COMM_NRF_START_PAIRING.index);
-                                byteData.setUint32(3, 10000); //milliseconds
-                                int checksum = CRC16.crc16(byteData.buffer.asUint8List(), 2, 5);
-                                byteData.setUint16(7, checksum);
-                                byteData.setUint8(9, 0x03); //End of packet
-
-                                //<start><payloadLen><packetID><int32_milliseconds><crc1><crc2><end>
-                                theTXCharacteristic.write(byteData.buffer.asUint8List()).then((value){
-                                  globalLogger.d('You have 10 seconds to power on your remote!');
-                                }).catchError((e){
-                                  globalLogger.e("nRF Quick Pair: Exception: $e");
-                                });
-                              } else {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Text("nRF Quick Pair"),
-                                      content: Text("Oops. Try connecting to your board first."),
-                                    );
-                                  },
-                                );
-                              }
-                            }),]),
+                  // Center(child: Text("Additional Tools"),),
+                  // Row( mainAxisAlignment: MainAxisAlignment.spaceBetween ,
+                  //     children: <Widget>[
+                  //       ElevatedButton(
+                  //         //TODO: quick pair for CAN FWD device?
+                  //           child: Row(children: <Widget>[
+                  //             Icon(Icons.settings_remote),
+                  //             Text("nRF Quick Pair")
+                  //           ],),
+                  //           onPressed: () {
+                  //             // Don't write if not connected
+                  //             if (theTXCharacteristic != null) {
+                  //               var byteData = new ByteData(10); //<start><payloadLen><packetID><int32_milliseconds><crc1><crc2><end>
+                  //               byteData.setUint8(0, 0x02);
+                  //               byteData.setUint8(1, 0x05);
+                  //               byteData.setUint8(2, COMM_PACKET_ID.COMM_NRF_START_PAIRING.index);
+                  //               byteData.setUint32(3, 10000); //milliseconds
+                  //               int checksum = CRC16.crc16(byteData.buffer.asUint8List(), 2, 5);
+                  //               byteData.setUint16(7, checksum);
+                  //               byteData.setUint8(9, 0x03); //End of packet
+                  //
+                  //               //<start><payloadLen><packetID><int32_milliseconds><crc1><crc2><end>
+                  //               theTXCharacteristic.write(byteData.buffer.asUint8List()).then((value){
+                  //                 globalLogger.d('You have 10 seconds to power on your remote!');
+                  //               }).catchError((e){
+                  //                 globalLogger.e("nRF Quick Pair: Exception: $e");
+                  //               });
+                  //             } else {
+                  //               showDialog(
+                  //                 context: context,
+                  //                 builder: (BuildContext context) {
+                  //                   return AlertDialog(
+                  //                     title: Text("nRF Quick Pair"),
+                  //                     content: Text("Oops. Try connecting to your board first."),
+                  //                   );
+                  //                 },
+                  //               );
+                  //             }
+                  //           }),]),
                 ],
               ),
             )

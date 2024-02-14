@@ -343,8 +343,16 @@ class ESCHelper {
   static Future<ESCProfile> getESCProfile(int profileIndex) async {
     //globalLogger.d("getESCProfile is loading index $profileIndex");
     final prefs = await SharedPreferences.getInstance();
+    var profileName = prefs.getString('profile$profileIndex name');
+    if(profileName == null) {
+      ESCProfile profile = getESCProfileDefaults(profileIndex);
+
+      await setESCProfile(profileIndex, profile);
+      return profile;
+    }
+
     ESCProfile response = new ESCProfile();
-    response.profileName = prefs.getString('profile$profileIndex name') ?? "Unnamed";
+    response.profileName = profileName;
     response.speedKmh = prefs.getDouble('profile$profileIndex speedKmh') ?? 32.0;
     response.speedKmhRev = prefs.getDouble('profile$profileIndex speedKmhRev') ?? -32.0;
     response.l_current_min_scale = prefs.getDouble('profile$profileIndex l_current_min_scale') ?? 1.0;
@@ -356,7 +364,7 @@ class ESCHelper {
   }
   static Future<String> getESCProfileName(int profileIndex) async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('profile$profileIndex name') ?? "Unnamed";
+    return prefs.getString('profile$profileIndex name') ?? getESCProfileDefaults(profileIndex).profileName;
   }
   static Future<void> setESCProfile(int profileIndex, ESCProfile profile) async {
     globalLogger.d("setESCProfile is saving index $profileIndex");
